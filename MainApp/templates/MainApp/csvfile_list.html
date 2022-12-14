@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container text-center" >
+    <title>CSV File List</title>
+</div>
+
+<div class="container text-center mt-4 mb-4">
+    <div class="row">
+        <div class="col-8">
+            <h3>CSV File List</h3>
+        </div>
+        <div class="col-4">
+            <a href="{% url 'MainApp:csvfile_create' %}"> <button type="button" class="btn btn-primary">Upload CSV</button></a>
+        </div>
+    </div>
+    
+    <br><br>
+
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Sr. No</th>
+                <th scope="col">CSV File</th>
+                <th scope="col">Time Frame</th>
+                <th scope="col">View</th>
+                <th scope="col">Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{object.sys_id}} </td>
+                    <td><a target="_blank" class="anchor-secondary py-4" href="{{ object.csv_file.url }}">{{ object.csv_file.name }}</a></td>
+                        
+                    <td>{{object.timeframe}} </td>
+                    <td>
+                        <a target="_blank" class="anchor-secondary py-4" href="{% url 'MainApp:csvfile_detail' object.pk %}"></i>Candlesticks</a>
+                    </td>
+                    <td>
+                        {% if object.json_file %}
+                            <a target="_blank" class="anchor-secondary py-4" href="{{ object.json_file.url }}">JSON File</a>
+                        {% else %}
+                            <a class="anchor-secondary py-4" href="#">No JSON File</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+{% endblock content %}

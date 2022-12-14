@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<title>Candlesticks</title>
+
+<div class="container text-center mt-4">
+    <div class="row">
+        <div class="col-3">
+            <a target="_blank" class="anchor-secondary py-4" href="{% url 'MainApp:csvfile_list' %} "><i class="fas fa-file fa-2x mb-2" aria-hidden="true"></i>View CSV List</a>
+        </div>
+        <div class="col-6">
+            <h3>Candlesticks - {{object}} </h3>
+        </div>
+        <div class="col-3">
+            {% if object.json_file %}
+                <a target="_blank" class="anchor-secondary py-4" href="{{ object.json_file.url }}"><i class="fas fa-file fa-2x mb-2" aria-hidden="true"></i>Download JSON File</a>
+            {% else %}
+                <a target="_blank" class="anchor-secondary py-4" href="#"><i class="fas fa-file fa-2x mb-2" aria-hidden="true" disabled></i>No JSON File</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <table class="table table-hover mt-5 table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Sys ID</th>
+                <th scope="col">Nifty</th>
+                <th scope="col">Open</th>
+                <th scope="col">High</th>
+                <th scope="col">Low</th>
+                <th scope="col">Close</th>
+                <th scope="col">Volume</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candle in candles %}
+                <tr>
+                    <td> {{candle.sys_id}} </td>
+                    <td> {{candle.banknifty}} </td>
+                    <td> {{candle.open_value}} </td>
+                    <td> {{candle.high}} </td>
+                    <td> {{candle.low}} </td>
+                    <td> {{candle.close}} </td>
+                    <td> {{candle.volume}} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}

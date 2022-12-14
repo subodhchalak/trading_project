@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<title>Upload CSV File</title>
+
+<div class="container text-center">
+    <div class="col-12 mt-4">
+        <h3>Upload CSV File</h3>
+    </div>
+
+    <div class="form-control mt-4" >
+        <form method="post" class="my-class" enctype="multipart/form-data">
+            {{ form|crispy }}
+            {% csrf_token %}
+                <button type="button" onclick="history.back();" value="cancel" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-success" value="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+
+
+{% endblock content %}
